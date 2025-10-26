@@ -1,0 +1,20 @@
+{
+  "name": "@splitwise-like/db",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "rm -rf dist",
+    "generate": "drizzle-kit generate --config drizzle.config.ts",
+    "migrate": "drizzle-kit migrate --config drizzle.config.ts"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.33.0",
+    "drizzle-kit": "^0.24.0",
+    "pg": "^8.12.0",
+    "zod": "^3.23.8"
+  }
+}

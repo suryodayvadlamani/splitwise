@@ -1,0 +1,7 @@
+telemetry = false
+
+[install]
+production = false
+
+[test]
+preload = []

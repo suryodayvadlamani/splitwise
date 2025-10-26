@@ -1,0 +1,24 @@
+{
+  "name": "@splitwise-like/mobile",
+  "version": "0.1.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "dev": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "build": "echo 'Expo builds are handled by EAS'"
+  },
+  "dependencies": {
+    "expo": "~51.0.0",
+    "react": "18.3.1",
+    "react-native": "0.74.3",
+    "expo-status-bar": "~1.12.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.7",
+    "@types/react-native": "^0.73.0",
+    "typescript": "^5.6.3",
+    "babel-preset-expo": "^11.0.6"
+  }
+}
