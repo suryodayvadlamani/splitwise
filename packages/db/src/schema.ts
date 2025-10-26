@@ -1,43 +1,43 @@
-import { pgTable, text, timestamp, integer, uuid, boolean } from "drizzle-orm/pg-core";
+import { sqliteTable, text, integer, blob } from "drizzle-orm/sqlite-core";
 
-export const users = pgTable("users", {
-  id: uuid("id").primaryKey().defaultRandom(),
+export const users = sqliteTable("users", {
+  id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
   name: text("name").notNull(),
   email: text("email").notNull().unique(),
-  createdAt: timestamp("created_at").defaultNow().notNull()
+  createdAt: integer("created_at", { mode: "timestamp" }).$defaultFn(() => new Date()).notNull()
 });
 
-export const groups = pgTable("groups", {
-  id: uuid("id").primaryKey().defaultRandom(),
+export const groups = sqliteTable("groups", {
+  id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
   name: text("name").notNull(),
-  createdAt: timestamp("created_at").defaultNow().notNull()
+  createdAt: integer("created_at", { mode: "timestamp" }).$defaultFn(() => new Date()).notNull()
 });
 
-export const groupMembers = pgTable("group_members", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  groupId: uuid("group_id").notNull().references(() => groups.id, { onDelete: "cascade" }),
-  userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
-  isAdmin: boolean("is_admin").default(false).notNull(),
-  createdAt: timestamp("created_at").defaultNow().notNull()
+export const groupMembers = sqliteTable("group_members", {
+  id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
+  groupId: text("group_id").notNull().references(() => groups.id, { onDelete: "cascade" }),
+  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  isAdmin: integer("is_admin", { mode: "boolean" }).default(false).notNull(),
+  createdAt: integer("created_at", { mode: "timestamp" }).$defaultFn(() => new Date()).notNull()
 });
 
-export const expenses = pgTable("expenses", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  groupId: uuid("group_id"),
-  payerId: uuid("payer_id").notNull().references(() => users.id),
+export const expenses = sqliteTable("expenses", {
+  id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
+  groupId: text("group_id"),
+  payerId: text("payer_id").notNull().references(() => users.id),
   amountCents: integer("amount_cents").notNull(),
   currency: text("currency").notNull().default("USD"),
   description: text("description").notNull(),
-  createdAt: timestamp("created_at").defaultNow().notNull()
+  createdAt: integer("created_at", { mode: "timestamp" }).$defaultFn(() => new Date()).notNull()
 });
 
-export const expenseShares = pgTable("expense_shares", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  expenseId: uuid("expense_id").notNull().references(() => expenses.id, { onDelete: "cascade" }),
-  userId: uuid("user_id").notNull().references(() => users.id),
+export const expenseShares = sqliteTable("expense_shares", {
+  id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
+  expenseId: text("expense_id").notNull().references(() => expenses.id, { onDelete: "cascade" }),
+  userId: text("user_id").notNull().references(() => users.id),
   amountCents: integer("amount_cents").notNull()
 });
 
-export const settlements = pgTable("settlements", {
-  id: uuid("id").primaryKey().defaultRandom()},
-);
+export const settlements = sqliteTable("settlements", {
+  id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID())
+});

@@ -4,8 +4,7 @@
     "composite": true,
     "declaration": true,
     "emitDeclarationOnly": false,
-    "outDir": "dist",
-    "rootDir": "src"
+    "outDir": "dist"
   },
-  "include": ["src", "drizzle.config.ts"]
+  "include": ["src/**/*", "drizzle.config.ts"]
 }

@@ -1,10 +1,6 @@
-import { drizzle } from "drizzle-orm/node-postgres";
-import pg from "pg";
+import { drizzle } from "drizzle-orm/bun-sqlite";
+import { Database } from "bun:sqlite";
 
-const { Pool } = pg;
+const sqlite = new Database(process.env.DATABASE_URL || "/Users/suryodayvadlamani/Projects/splitwise/dev.db");
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL
-});
-
-export const db = drizzle(pool);
+export const db = drizzle(sqlite);

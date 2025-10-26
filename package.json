@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "concurrently -n \"api,web\" -c \"cyan,magenta\" \"cd apps/api && bun run dev\" \"cd apps/web && bun run dev\"",
     "dev:api": "cd apps/api && bun run dev",
-    "dev:web": "cd apps/web && bun run dev",
+    "dev:web": "cd apps/web && npm run dev",
     "dev:mobile": "cd apps/mobile && bun run dev",
     "dev:all": "concurrently -n \"api,web,mobile\" -c \"cyan,magenta,green\" \"cd apps/api && bun run dev\" \"cd apps/web && bun run dev\" \"cd apps/mobile && bun run dev\"",
     "build": "bun --cwd packages/types run build && bun --cwd packages/db run build && bun --cwd apps/api run build && bun --cwd apps/web run build",
@@ -19,7 +19,11 @@
     "typecheck": "echo 'Run type checks within each workspace'"
   },
   "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
     "concurrently": "^9.2.1",
     "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.4.1"
   }
 }
